@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portal Educativo</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f6fc;
+overflow-x:hidden;
+}
+
+/* LOGIN */
+
+.login-screen{
+position:fixed;
+width:100%;
+height:100vh;
+background:linear-gradient(135deg,#4f46e5,#7c3aed);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.login-box{
+background:white;
+padding:35px;
+border-radius:15px;
+width:350px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+text-align:center;
+}
+
+.login-box h2{
+margin-bottom:20px;
+color:#4f46e5;
+}
+
+.login-box input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+.login-box button{
+width:100%;
+padding:12px;
+background:#4f46e5;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+.error{
+color:red;
+margin-top:10px;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:250px;
+height:100vh;
+background:#1e1b4b;
+position:fixed;
+left:0;
+top:0;
+padding:20px;
+color:white;
+}
+
+.logo{
+text-align:center;
+font-size:28px;
+font-weight:bold;
+margin-bottom:40px;
+}
+
+.sidebar a{
+display:block;
+padding:15px;
+color:white;
+text-decoration:none;
+border-radius:10px;
+margin-bottom:10px;
+transition:.3s;
+}
+
+.sidebar a:hover{
+background:#4338ca;
+}
+
+/* CONTENIDO */
+
+.main{
+margin-left:250px;
+}
+
+/* NAVBAR */
+
+.navbar{
+position:sticky;
+top:0;
+background:white;
+padding:15px 30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
+z-index:1000;
+}
+
+.navbar ul{
+display:flex;
+list-style:none;
+gap:20px;
+}
+
+.navbar a{
+text-decoration:none;
+color:#333;
+font-weight:600;
+}
+
+/* MENUS */
+
+.dropdown{
+position:relative;
+}
+
+.dropdown-content{
+display:none;
+position:absolute;
+background:white;
+min-width:180px;
+box-shadow:0 3px 10px rgba(0,0,0,.15);
+border-radius:10px;
+top:30px;
+}
+
+.dropdown-content a{
+display:block;
+padding:12px;
+}
+
+.dropdown:hover .dropdown-content{
+display:block;
+}
+
+/* SLIDER */
+
+.slider{
+height:400px;
+overflow:hidden;
+}
+
+.slides{
+display:flex;
+width:300%;
+height:100%;
+animation:slide 12s infinite;
+}
+
+.slide{
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:40px;
+font-weight:bold;
+color:white;
+}
+
+.s1{
+background:linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+.s2{
+background:linear-gradient(135deg,#2563eb,#06b6d4);
+}
+
+.s3{
+background:linear-gradient(135deg,#0891b2,#22c55e);
+}
+
+@keyframes slide{
+0%,25%{transform:translateX(0);}
+33%,58%{transform:translateX(-33.333%);}
+66%,91%{transform:translateX(-66.666%);}
+100%{transform:translateX(0);}
+}
+
+/* SECCIONES */
+
+.section{
+padding:50px;
+}
+
+.titulo{
+text-align:center;
+margin-bottom:30px;
+font-size:32px;
+color:#1e293b;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 3px 15px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card h3{
+color:#4338ca;
+margin-bottom:10px;
+}
+
+.btn{
+display:inline-block;
+margin-top:15px;
+background:#4338ca;
+color:white;
+padding:10px 20px;
+border-radius:8px;
+text-decoration:none;
+}
+
+/* PORTAFOLIO */
+
+.galeria{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+}
+
+.galeria img{
+width:100%;
+border-radius:15px;
+}
+
+/* FOOTER */
+
+footer{
+background:#1e1b4b;
+color:white;
+padding:30px;
+text-align:center;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.sidebar{
+width:70px;
+}
+
+.sidebar a{
+font-size:12px;
+padding:10px;
+}
+
+.main{
+margin-left:70px;
+}
+
+.navbar{
+flex-direction:column;
+gap:10px;
+}
+
+.navbar ul{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.slide{
+font-size:28px;
+text-align:center;
+padding:20px;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div class="login-screen" id="loginPage">
+
+<div class="login-box">
+
+<h2>Portal Educativo</h2>
+
+<input type="text" id="user" placeholder="Usuario">
+
+<input type="password" id="pass" placeholder="Contraseña">
+
+<button onclick="login()">Ingresar</button>
+
+<p class="error" id="error"></p>
+
+</div>
+
+</div>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div class="logo">🎓 EDU</div>
+
+<a href="#inicio">🏠 Inicio</a>
+<a href="#cursos">📚 Cursos</a>
+<a href="#biblioteca">📖 Biblioteca</a>
+<a href="#docentes">👨‍🏫 Docentes</a>
+<a href="#contacto">📞 Contacto</a>
+
+</div>
+
+<div class="main">
+
+<nav class="navbar">
+
+<h3>Campus Virtual</h3>
+
+<ul>
+
+<li><a href="#inicio">Inicio</a></li>
+
+<li class="dropdown">
+
+<a href="#">Cursos ▼</a>
+
+<div class="dropdown-content">
+<a href="#">Matemática</a>
+<a href="#">Comunicación</a>
+<a href="#">Ciencia</a>
+</div>
+
+</li>
+
+<li class="dropdown">
+
+<a href="#">Recursos ▼</a>
+
+<div class="dropdown-content">
+<a href="#">Videos</a>
+<a href="#">PDF</a>
+<a href="#">Guías</a>
+</div>
+
+</li>
+
+<li><a href="#contacto">Contacto</a></li>
+
+</ul>
+
+</nav>
+
+<section class="slider" id="inicio">
+
+<div class="slides">
+
+<div class="slide s1">
+Bienvenidos al Portal Educativo
+</div>
+
+<div class="slide s2">
+Aprende con Recursos Digitales
+</div>
+
+<div class="slide s3">
+Construye tu Futuro
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="cursos">
+
+<h2 class="titulo">Cursos Destacados</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Matemática</h3>
+<p>Álgebra, Geometría y Estadística.</p>
+<a href="#" class="btn">Ingresar</a>
+</div>
+
+<div class="card">
+<h3>Comunicación</h3>
+<p>Lectura crítica y redacción.</p>
+<a href="#" class="btn">Ingresar</a>
+</div>
+
+<div class="card">
+<h3>EPT</h3>
+<p>Diseño Web y Emprendimiento.</p>
+<a href="#" class="btn">Ingresar</a>
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="biblioteca">
+
+<h2 class="titulo">Biblioteca Virtual</h2>
+
+<div class="galeria">
+
+<img src="https://picsum.photos/400/250?1">
+<img src="https://picsum.photos/400/250?2">
+<img src="https://picsum.photos/400/250?3">
+
+</div>
+
+</section>
+
+<section class="section" id="docentes">
+
+<h2 class="titulo">Equipo Docente</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Docente Matemática</h3>
+<p>Especialista en razonamiento matemático.</p>
+</div>
+
+<div class="card">
+<h3>Docente Comunicación</h3>
+<p>Comprensión lectora y escritura.</p>
+</div>
+
+<div class="card">
+<h3>Docente EPT</h3>
+<p>Desarrollo de proyectos digitales.</p>
+</div>
+
+</div>
+
+</section>
+
+<footer id="contacto">
+<h2>Portal Educativo 2026</h2>
+<p>Campus Virtual - Todos los derechos reservados</p>
+</footer>
+
+</div>
+
+<script>
+
+function login(){
+
+let usuario=document.getElementById("user").value;
+let clave=document.getElementById("pass").value;
+
+if(
+(usuario==="admin" && clave==="1234") ||
+(usuario==="docente" && clave==="docente2026") ||
+(usuario==="alumno" && clave==="alumno2026")
+)
+{
+document.getElementById("loginPage").style.display="none";
+}
+else{
+document.getElementById("error").innerHTML=
+"Usuario o contraseña incorrectos";
+}
+
+}
+
+</script>
+
+</body>
+</html>
